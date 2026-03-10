@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" x-data="{ lang: 'ar', scrolled: false, mobileOpen: false }"
+  x-init="window.addEventListener('scroll', () => scrolled = window.scrollY > 50)">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fast Link - Your Gateway to Premium Electronics</title>
+  <link rel="icon" type="image/png" href="./imgs/logo.png" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Alpine.js -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cairo:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#C41E3A',
+            'primary-dark': '#9B1B30',
+            dark: '#0a0a0a',
+            'dark-light': '#1a1a1a',
+            'dark-card': '#141414',
+          },
+          fontFamily: {
+            sans: ['Inter', 'Cairo', 'sans-serif'],
+            arabic: ['Cairo', 'sans-serif'],
+          },
+          animation: {
+            'float': 'float 3s ease-in-out infinite',
+            'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
+            'spin-slow': 'spin 8s linear infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-15px)' },
+            },
+            pulseGlow: {
+              '0%, 100%': { boxShadow: '0 0 20px rgba(196, 30, 58, 0.5), 0 0 40px rgba(196, 30, 58, 0.3)' },
+              '50%': { boxShadow: '0 0 30px rgba(196, 30, 58, 0.8), 0 0 60px rgba(196, 30, 58, 0.5), 0 0 90px rgba(196, 30, 58, 0.3)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #0a0a0a;
+      color: #f5f5f5;
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0a0a0a;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #C41E3A;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #e02a4a;
+    }
+
+    /* Glow Effects */
+    .glow-red {
+      box-shadow: 0 0 20px rgba(196, 30, 58, 0.5),
+        0 0 40px rgba(196, 30, 58, 0.3),
+        0 0 60px rgba(196, 30, 58, 0.2);
+    }
+
+    .glow-text {
+      text-shadow: 0 0 10px rgba(196, 30, 58, 0.8),
+        0 0 20px rgba(196, 30, 58, 0.5);
+    }
+
+    /* Gradient Background */
+    .gradient-dark {
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+    }
+
+    /* Grid Pattern */
+    .grid-pattern {
+      background-image:
+        linear-gradient(rgba(196, 30, 58, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(196, 30, 58, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+
+    /* Card Hover */
+    .card-hover {
+      transition: all 0.3s ease;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(196, 30, 58, 0.2);
+      border-color: #C41E3A;
+    }
+
+    /* Button Shine */
+    .btn-shine {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-shine::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .btn-shine:hover::before {
+      left: 100%;
+    }
+
+    /* Nav Link Underline */
+    .nav-link {
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background: #C41E3A;
+      transition: width 0.3s ease;
+    }
+
+    [dir="rtl"] .nav-link::after {
+      right: 0;
+    }
+
+    [dir="ltr"] .nav-link::after {
+      left: 0;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* Ticket Design */
+    .ticket {
+      position: relative;
+      background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+      border: 2px dashed #C41E3A;
+    }
+
+    .ticket::before,
+    .ticket::after {
+      content: '';
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: #0a0a0a;
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    [dir="rtl"] .ticket::before {
+      right: -15px;
+    }
+
+    [dir="rtl"] .ticket::after {
+      left: -15px;
+    }
+
+    [dir="ltr"] .ticket::before {
+      left: -15px;
+    }
+
+    [dir="ltr"] .ticket::after {
+      right: -15px;
+    }
+
+    /* Floating Animation */
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+
+    .animate-float {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    /* Pulse Glow Animation */
+    @keyframes pulseGlow {
+
+      0%,
+      100% {
+        box-shadow: 0 0 20px rgba(196, 30, 58, 0.5), 0 0 40px rgba(196, 30, 58, 0.3);
+      }
+
+      50% {
+        box-shadow: 0 0 30px rgba(196, 30, 58, 0.8), 0 0 60px rgba(196, 30, 58, 0.5), 0 0 90px rgba(196, 30, 58, 0.3);
+      }
+    }
+
+    .animate-pulse-glow {
+      animation: pulseGlow 2s ease-in-out infinite;
+    }
+
+    /* Brand Icon Colors */
+    .brand-arcelik {
+      color: #C41E3A;
+    }
+
+    .brand-vestel {
+      color: #E31837;
+    }
+
+    .brand-nextstar {
+      color: #FF6B00;
+    }
+
+    .brand-navitig {
+      color: #00A8E8;
+    }
+
+    .brand-onvo {
+      color: #7B68EE;
+    }
+
+    .brand-vobim {
+      color: #32CD32;
+    }
+
+    .brand-strong {
+      color: #FFD700;
+    }
+  </style>
+</head>
+
+<body class="font-sans antialiased">
+
+  <!-- ==================== NAVBAR ==================== -->
+  <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+    :class="scrolled ? 'bg-dark/95 backdrop-blur-md shadow-lg border-b border-primary/20' : 'bg-transparent'">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <!-- Logo -->
+        <a href="#home" class="flex items-center gap-3 group">
+          <div
+            class="w-12 h-12 bg-gradient-to-br from-black to-primary rounded-lg flex items-center justify-center transform group-hover:scale-110 transition-transform"
+            style="background: #f5eded;">
+            <span class="text-white font-bold text-xl">
+              <img src="./imgs/logo.png" alt="FL">
+            </span>
+          </div>
+          <span class="text-xl font-bold text-white hidden sm:block">Fast Link</span>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden lg:flex items-center gap-8">
+          <template x-if="lang === 'ar'">
+            <div class="flex items-center gap-8">
+              <a href="#home"
+                class="nav-link text-gray-300 hover:text-white transition-colors text-sm font-medium">الرئيسية</a>
+              <a href="#services"
+                class="nav-link text-gray-300 hover:text-white transition-colors text-sm font-medium">خدماتنا</a>
+              <a href="#brands"
+                class="nav-link text-gray-300 hover:text-white transition-colors text-sm font-medium">التوكيلات</a>
+              <a href="#maintenance"
+                class="nav-link text-gray-300 hover:text-white transition-colors text-sm font-medium">الصيانة</a>
+              <a href="#gifts"
+                class="nav-link text-gray-300 hover:text-white transition-colors text-sm font-medium">الهدايا</a>
+            </div>
+          </template>
+          <template x-if="lang === 'en'">
+            <div class="flex items-center gap-8">
+              <a href="#home"
+                class="nav-link text-gray-300 hover:text-white transition-colors text-sm font-medium">Home</a>
+              <a href="#services"
+                class="nav-link text-gray-300 hover:text-white transition-colors text-sm font-medium">Services</a>
+              <a href="#brands"
+                class="nav-link text-gray-300 hover:text-white transition-colors text-sm font-medium">Brands</a>
+              <a href="#maintenance"
+                class="nav-link text-gray-300 hover:text-white transition-colors text-sm font-medium">Maintenance</a>
+              <a href="#gifts"
+                class="nav-link text-gray-300 hover:text-white transition-colors text-sm font-medium">Gifts</a>
+            </div>
+          </template>
+        </div>
+
+        <!-- Language Switcher & Mobile Menu -->
+        <div class="flex items-center gap-4">
+          <button
+            @click="lang = lang === 'ar' ? 'en' : 'ar'; document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr'; document.documentElement.lang = lang"
+            class="flex items-center gap-2 px-4 py-2 rounded-full border border-primary/50 text-primary hover:bg-primary hover:text-white transition-all duration-300 text-sm font-medium">
+            <i class="fas fa-globe"></i>
+            <span x-text="lang === 'ar' ? 'English' : 'العربية'"></span>
+          </button>
+
+          <!-- Mobile Menu Button -->
+          <button @click="mobileOpen = !mobileOpen"
+            class="lg:hidden p-2 text-white hover:text-primary transition-colors">
+            <i class="fas fa-bars text-xl" x-show="!mobileOpen"></i>
+            <i class="fas fa-times text-xl" x-show="mobileOpen"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div
+      class="lg:hidden absolute top-full left-0 right-0 bg-dark/98 backdrop-blur-md border-b border-primary/20 transition-all duration-300"
+      :class="mobileOpen ? 'opacity-100 visible' : 'opacity-0 invisible'">
+      <div class="px-4 py-6 space-y-4">
+        <template x-if="lang === 'ar'">
+          <div class="space-y-4">
+            <a href="#home" @click="mobileOpen = false"
+              class="block text-gray-300 hover:text-primary transition-colors text-lg font-medium py-2">الرئيسية</a>
+            <a href="#services" @click="mobileOpen = false"
+              class="block text-gray-300 hover:text-primary transition-colors text-lg font-medium py-2">خدماتنا</a>
+            <a href="#brands" @click="mobileOpen = false"
+              class="block text-gray-300 hover:text-primary transition-colors text-lg font-medium py-2">التوكيلات</a>
+            <a href="#maintenance" @click="mobileOpen = false"
+              class="block text-gray-300 hover:text-primary transition-colors text-lg font-medium py-2">الصيانة</a>
+            <a href="#gifts" @click="mobileOpen = false"
+              class="block text-gray-300 hover:text-primary transition-colors text-lg font-medium py-2">الهدايا</a>
+          </div>
+        </template>
+        <template x-if="lang === 'en'">
+          <div class="space-y-4">
+            <a href="#home" @click="mobileOpen = false"
+              class="block text-gray-300 hover:text-primary transition-colors text-lg font-medium py-2">Home</a>
+            <a href="#services" @click="mobileOpen = false"
+              class="block text-gray-300 hover:text-primary transition-colors text-lg font-medium py-2">Services</a>
+            <a href="#brands" @click="mobileOpen = false"
+              class="block text-gray-300 hover:text-primary transition-colors text-lg font-medium py-2">Brands</a>
+            <a href="#maintenance" @click="mobileOpen = false"
+              class="block text-gray-300 hover:text-primary transition-colors text-lg font-medium py-2">Maintenance</a>
+            <a href="#gifts" @click="mobileOpen = false"
+              class="block text-gray-300 hover:text-primary transition-colors text-lg font-medium py-2">Gifts</a>
+          </div>
+        </template>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <section id="home"
+    class="relative min-h-screen flex items-center justify-center overflow-hidden gradient-dark grid-pattern">
+    <!-- Background Effects -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
+      <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-primary/5 rounded-full blur-3xl animate-pulse"
+        style="animation-delay: 1s;"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20">
+      <div class="text-center">
+        <!-- Logo Animation -->
+        <div class="mb-8">
+          <div
+            class="w-32 h-32 mx-auto bg-gradient-to-br from-black via-dark to-primary rounded-2xl flex items-center justify-center animate-float glow-red">
+            <span class="text-white font-bold text-5xl">
+              <img src="./imgs/logo.png" alt="FL">
+            </span>
+          </div>
+        </div>
+
+        <!-- Title -->
+        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold mb-4 text-white">
+          Fast Link
+        </h1>
+
+        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-6 text-primary glow-text"
+          x-text="lang === 'ar' ? 'بوابتك للإلكترونيات المتميزة' : 'Your Gateway to Premium Electronics'"></h2>
+
+        <!-- Description -->
+        <p class="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto mb-10 leading-relaxed"
+          x-text="lang === 'ar' ? 'نقدم لك أفضل الأجهزة المنزلية والإلكترونيات من أشهر العلامات التجارية العالمية بأسعار تنافسية وخدمة متميزة' : 'We offer the best home appliances and electronics from world-renowned brands at competitive prices with exceptional service'">
+        </p>
+
+        <!-- CTA Button -->
+        <div class="mb-16">
+          <a href="#brands"
+            class="inline-flex items-center gap-3 px-8 py-4 bg-primary text-white rounded-full font-semibold text-lg btn-shine glow-red hover:bg-primary-dark transition-all duration-300 hover:scale-105">
+            <span x-text="lang === 'ar' ? 'استكشف المنتجات' : 'Explore Products'"></span>
+            <i class="fas fa-arrow-right" :class="lang === 'ar' ? '' : 'rotate-180'"></i>
+          </a>
+        </div>
+
+        <!-- Features -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <div
+            class="flex items-center justify-center gap-3 p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
+            <i class="fas fa-bolt text-primary text-xl"></i>
+            <span class="text-gray-300 font-medium" x-text="lang === 'ar' ? 'خدمات متميزة' : 'Premium Services'"></span>
+          </div>
+          <div
+            class="flex items-center justify-center gap-3 p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
+            <i class="fas fa-shield-alt text-primary text-xl"></i>
+            <span class="text-gray-300 font-medium" x-text="lang === 'ar' ? 'ضمان معتمد' : 'Certified Warranty'"></span>
+          </div>
+          <div
+            class="flex items-center justify-center gap-3 p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
+            <i class="fas fa-shopping-cart text-primary text-xl"></i>
+            <span class="text-gray-300 font-medium"
+              x-text="lang === 'ar' ? 'أسعار تنافسية' : 'Competitive Prices'"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Gradient -->
+    <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-dark to-transparent"></div>
+  </section>
+
+  <!-- ==================== BRANDS SECTION ==================== -->
+  <section id="brands" class="py-20 lg:py-32 bg-dark relative overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 grid-pattern opacity-50"></div>
+
+    <div class="max-w-7xl mx-auto relative z-10 px-4 sm:px-6 lg:px-8">
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <h2 class="text-4xl sm:text-5xl font-bold text-white mb-4"
+          x-text="lang === 'ar' ? 'التوكيلات العالمية' : 'Authorized Brands'"></h2>
+        <p class="text-xl text-primary font-semibold mb-4"
+          x-text="lang === 'ar' ? 'نحن وكلاء معتمدون لأشهر العلامات التجارية' : 'We are authorized agents for the most famous brands'">
+        </p>
+        <p class="text-gray-400 max-w-2xl mx-auto"
+          x-text="lang === 'ar' ? 'نقدم لك منتجات أصلية 100% من أفضل الشركات العالمية في مجال الإلكترونيات والأجهزة المنزلية' : 'We offer you 100% original products from the best international companies in electronics and home appliances'">
+        </p>
+      </div>
+
+      <!-- Brands Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+        <!-- Arçelik -->
+        <div
+          class="group relative p-8 rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 card-hover overflow-hidden">
+          <div
+            class="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300 bg-[radial-gradient(circle_at_center,#C41E3A,transparent_70%)]">
+          </div>
+          <div class="relative z-10 flex flex-col items-center">
+            <div
+              class="w-20 h-20 rounded-xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110 bg-primary/20"
+              style="background-color: white;">
+              <!-- <i class="fas fa-tv text-4xl brand-arcelik"></i> -->
+              <img src="./imgs/arcelik.png" alt="Arcelik" style="border-radius: 15px;">
+            </div>
+            <h3 class="text-xl font-bold text-white group-hover:text-primary transition-colors">Arçelik</h3>
+            <div class="w-12 h-1 rounded-full mt-3 transition-all group-hover:w-20 bg-primary"></div>
+          </div>
+        </div>
+
+        <!-- Vestel -->
+        <div
+          class="group relative p-8 rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 card-hover overflow-hidden">
+          <div
+            class="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300 bg-[radial-gradient(circle_at_center,#E31837,transparent_70%)]">
+          </div>
+          <div class="relative z-10 flex flex-col items-center">
+            <div
+              class="w-20 h-20 rounded-xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110 bg-red-600/20"
+              style="background-color: white;">
+              <!-- <i class="fas fa-desktop text-4xl brand-vestel"></i> -->
+              <img src="./imgs/vestel.png" alt="Vestel">
+            </div>
+            <!-- <img src="./imgs/vestel.png" alt="Vestel"
+              style="border-radius: 10px;box-shadow: 0px 0px 5px 0px rgba(237,224,224,0.75);"> -->
+            <h3 class="text-xl font-bold text-white group-hover:text-red-600 transition-colors">Vestel</h3>
+            <div class="w-12 h-1 rounded-full mt-3 transition-all group-hover:w-20 bg-red-600"></div>
+          </div>
+        </div>
+
+
+        <!-- Navitig -->
+        <div
+          class="group relative p-8 rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 card-hover overflow-hidden">
+          <div
+            class="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300 bg-[radial-gradient(circle_at_center,#00A8E8,transparent_70%)]">
+          </div>
+          <div class="relative z-10 flex flex-col items-center">
+            <div
+              class="w-20 h-20 rounded-xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110 bg-sky-500/20"
+              style="background-color: white;">
+              <!-- <i class="fas fa-satellite-dish text-4xl brand-navitig"></i> -->
+              <img src="./imgs/navitech.png" alt="Navitech">
+            </div>
+            <h3 class="text-xl font-bold text-white group-hover:text-sky-500 transition-colors">Navitech</h3>
+            <div class="w-12 h-1 rounded-full mt-3 transition-all group-hover:w-20 bg-sky-500"></div>
+          </div>
+        </div>
+
+        <!-- Onvo -->
+        <div
+          class="group relative p-8 rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 card-hover overflow-hidden">
+          <div
+            class="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300 bg-[radial-gradient(circle_at_center,#7B68EE,transparent_70%)]">
+          </div>
+          <div class="relative z-10 flex flex-col items-center">
+            <div
+              class="w-20 h-20 rounded-xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110 bg-violet-500/20"
+              style="background-color: white;">
+              <!-- <i class="fas fa-stopwatch text-4xl brand-onvo"></i> -->
+              <img src="./imgs/Onvo.jpg" alt="Onvo" style="border-radius: 10px;">
+            </div>
+            <h3 class="text-xl font-bold text-white group-hover:text-violet-500 transition-colors">Onvo</h3>
+            <div class="w-12 h-1 rounded-full mt-3 transition-all group-hover:w-20 bg-violet-500"></div>
+          </div>
+        </div>
+
+        <!-- Vobim -->
+        <div
+          class="group relative p-8 rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 card-hover overflow-hidden">
+          <div
+            class="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300 bg-[radial-gradient(circle_at_center,#32CD32,transparent_70%)]">
+          </div>
+          <div class="relative z-10 flex flex-col items-center">
+            <div
+              class="w-20 h-20 rounded-xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110 bg-green-500/20">
+              <i class="fas fa-headphones text-4xl brand-vobim"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white group-hover:text-green-500 transition-colors">Vobim</h3>
+            <div class="w-12 h-1 rounded-full mt-3 transition-all group-hover:w-20 bg-green-500"></div>
+          </div>
+        </div>
+
+        <!-- Strong -->
+        <div
+          class="group relative p-8 rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 card-hover overflow-hidden">
+          <div
+            class="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300 bg-[radial-gradient(circle_at_center,#FFD700,transparent_70%)]">
+          </div>
+          <div class="relative z-10 flex flex-col items-center">
+            <div
+              class="w-20 h-20 rounded-xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110 bg-yellow-500/20"
+              style="background-color: white;">
+              <!-- <i class="fas fa-volume-up text-4xl brand-strong"></i> -->
+              <img src="./imgs/strong.png" alt="Strong">
+            </div>
+            <h3 class="text-xl font-bold text-white group-hover:text-yellow-500 transition-colors">Strong</h3>
+            <div class="w-12 h-1 rounded-full mt-3 transition-all group-hover:w-20 bg-yellow-500"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trust Badge -->
+      <div class="mt-16 flex flex-wrap justify-center gap-8">
+        <div class="text-center px-8 py-4 rounded-xl bg-primary/10 border border-primary/20">
+          <div class="text-3xl font-bold text-primary mb-1">100%</div>
+          <div class="text-gray-400 text-sm" x-text="lang === 'ar' ? 'منتجات أصلية' : 'Original Products'"></div>
+        </div>
+        <div class="text-center px-8 py-4 rounded-xl bg-primary/10 border border-primary/20">
+          <div class="text-3xl font-bold text-primary mb-1">99+</div>
+          <div class="text-gray-400 text-sm" x-text="lang === 'ar' ? 'علامات تجارية' : 'Brands'"></div>
+        </div>
+        <div class="text-center px-8 py-4 rounded-xl bg-primary/10 border border-primary/20">
+          <div class="text-3xl font-bold text-primary mb-1">5 ★</div>
+          <div class="text-gray-400 text-sm" x-text="lang === 'ar' ? 'دعم فني' : 'Technical Support'"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="gallery" class="py-20 bg-dark-light relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-white mb-4" x-text="lang === 'ar' ? 'معرض المنتجات' : 'Product Gallery'">
+        </h2>
+        <div class="w-24 h-1 bg-primary mx-auto"></div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="group relative aspect-square overflow-hidden rounded-2xl border border-white/10 card-hover">
+          <img src="https://images.unsplash.com/photo-1550009158-9ebf69173e03?q=80&w=500" alt="Product"
+            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+            <span class="text-white font-medium" x-text="lang === 'ar' ? 'أحدث الشاشات' : 'Latest Screens'"></span>
+          </div>
+        </div>
+        <div class="group relative aspect-square overflow-hidden rounded-2xl border border-white/10 card-hover">
+          <img src="./imgs/p1.jpeg" alt="Product"
+            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+            <span class="text-white font-medium" x-text="lang === 'ar' ? 'أجمل الشاشات' : 'Latest Screens'"></span>
+          </div>
+        </div>
+        <div class="group relative aspect-square overflow-hidden rounded-2xl border border-white/10 card-hover">
+          <img src="./imgs/p2.jpeg" alt="Product"
+            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+            <span class="text-white font-medium" x-text="lang === 'ar' ? 'أجمل الشاشات' : 'Latest Screens'"></span>
+          </div>
+        </div>
+        <div class="group relative aspect-square overflow-hidden rounded-2xl border border-white/10 card-hover">
+          <img src="./imgs/p6.jpeg" alt="Product"
+            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+            <span class="text-white font-medium"
+              x-text="lang === 'ar' ? 'رسيرفرات واشتراكات' : 'Servers & Subscriptions'"></span>
+          </div>
+        </div>
+        <div class="group relative aspect-square overflow-hidden rounded-2xl border border-white/10 card-hover">
+          <img src="./imgs/p3.jpeg" alt="Product"
+            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+            <span class="text-white font-medium" x-text="lang === 'ar' ? 'فلاتر مياه' : 'Water Filters'"></span>
+          </div>
+        </div>
+        <div class="group relative aspect-square overflow-hidden rounded-2xl border border-white/10 card-hover">
+          <img src="./imgs/p5.jpeg" alt="Product"
+            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+            <span class="text-white font-medium" x-text="lang === 'ar' ? 'أجمل الشاشات' : 'Latest Screens'"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="videos" class="py-20 bg-dark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-white mb-2"
+          x-text="lang === 'ar' ? 'تغطياتنا الحصرية' : 'Our Exclusive Coverage'"></h2>
+        <p class="text-primary"
+          x-text="lang === 'ar' ? 'شاهد أحدث المراجعات والعروض' : 'Watch latest reviews and offers'"></p>
+      </div>
+
+      <div class="flex overflow-x-auto lg:grid lg:grid-cols-4 gap-6 pb-8 snap-x no-scrollbar">
+        <div
+          class="min-w-[280px] snap-center aspect-[9/16] bg-dark-card rounded-3xl overflow-hidden border border-white/10 relative group shadow-2xl"
+          x-data="{ playing: false }">
+
+          <div
+            class="absolute inset-0 z-20 cursor-pointer flex items-center justify-center bg-black/40 group-hover:bg-black/20 transition-all"
+            @click="playing = !playing; playing ? $refs.videoPlayer.play() : $refs.videoPlayer.pause()">
+
+            <i class="fas fa-play text-white text-4xl transition-transform" x-show="!playing" x-transition></i>
+          </div>
+
+          <video x-ref="videoPlayer" class="w-full h-full object-cover" poster="./videos/v1.png" loop playsinline>
+            <source src="./videos/1.mp4" type="video/mp4">
+          </video>
+
+          <div class="absolute bottom-4 left-4 right-4 z-30">
+            <p class="text-white text-sm font-semibold truncate"
+              x-text="lang === 'ar' ? 'وصف الفيديو' : 'Video Description'"></p>
+          </div>
+        </div>
+
+        <div
+          class="min-w-[280px] snap-center aspect-[9/16] bg-dark-card rounded-3xl overflow-hidden border border-white/10 relative group shadow-2xl"
+          x-data="{ playing: false }">
+
+          <div
+            class="absolute inset-0 z-20 cursor-pointer flex items-center justify-center bg-black/40 group-hover:bg-black/20 transition-all"
+            @click="playing = !playing; playing ? $refs.videoPlayer.play() : $refs.videoPlayer.pause()">
+
+            <i class="fas fa-play text-white text-4xl transition-transform" x-show="!playing" x-transition></i>
+          </div>
+
+          <video x-ref="videoPlayer" class="w-full h-full object-cover" poster="./videos/v2.png" loop playsinline>
+            <source src="./videos/2.mp4" type="video/mp4">
+          </video>
+
+          <div class="absolute bottom-4 left-4 right-4 z-30">
+            <p class="text-white text-sm font-semibold truncate"
+              x-text="lang === 'ar' ? 'وصف الفيديو' : 'Video Description'"></p>
+          </div>
+        </div>
+
+        <div
+          class="min-w-[280px] snap-center aspect-[9/16] bg-dark-card rounded-3xl overflow-hidden border border-white/10 relative group shadow-2xl"
+          x-data="{ playing: false }">
+
+          <div
+            class="absolute inset-0 z-20 cursor-pointer flex items-center justify-center bg-black/40 group-hover:bg-black/20 transition-all"
+            @click="playing = !playing; playing ? $refs.videoPlayer.play() : $refs.videoPlayer.pause()">
+
+            <i class="fas fa-play text-white text-4xl transition-transform" x-show="!playing" x-transition></i>
+          </div>
+
+          <video x-ref="videoPlayer" class="w-full h-full object-cover" poster="./videos/v3.png" loop playsinline>
+            <source src="./videos/3.mp4" type="video/mp4">
+          </video>
+
+          <div class="absolute bottom-4 left-4 right-4 z-30">
+            <p class="text-white text-sm font-semibold truncate"
+              x-text="lang === 'ar' ? 'وصف الفيديو' : 'Video Description'"></p>
+          </div>
+        </div>
+
+        <div
+          class="min-w-[280px] snap-center aspect-[9/16] bg-dark-card rounded-3xl overflow-hidden border border-white/10 relative group shadow-2xl"
+          x-data="{ playing: false }">
+
+          <div
+            class="absolute inset-0 z-20 cursor-pointer flex items-center justify-center bg-black/40 group-hover:bg-black/20 transition-all"
+            @click="playing = !playing; playing ? $refs.videoPlayer.play() : $refs.videoPlayer.pause()">
+
+            <i class="fas fa-play text-white text-4xl transition-transform" x-show="!playing" x-transition></i>
+          </div>
+
+          <video x-ref="videoPlayer" class="w-full h-full object-cover" poster="./videos/v4.png" loop playsinline>
+            <source src="./videos/4.mp4" type="video/mp4">
+          </video>
+
+          <div class="absolute bottom-4 left-4 right-4 z-30">
+            <p class="text-white text-sm font-semibold truncate"
+              x-text="lang === 'ar' ? 'وصف الفيديو' : 'Video Description'"></p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== LUCKY DRAW SECTION ==================== -->
+
+  <section id="gifts" class="py-20 lg:py-32 bg-dark relative overflow-hidden">
+    <div class="absolute inset-0 grid-pattern opacity-20"></div>
+    <div class="max-w-7xl mx-auto relative z-10 px-4 sm:px-6 lg:px-8">
+
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-white mb-4"
+          x-text="lang === 'ar' ? 'فائزوا Fast Link' : 'Fast Link Winners'">
+        </h2>
+        <p class="text-xl text-primary font-semibold"
+          x-text="lang === 'ar' ? 'لحظات سعيدة مع عملائنا الرابحين' : 'Happy moments with our winning customers'"></p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div
+          class="bg-dark-card rounded-3xl overflow-hidden border-2 border-primary/20 hover:border-primary transition-all">
+          <div class="relative aspect-[4/3]">
+            <img src="./imgs/c1.jpeg" alt="Winner" class="w-full h-full object-cover">
+            <div class="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-xs font-bold">
+              <i class="fas fa-medal mr-1"></i> <span x-text="lang === 'ar' ? 'رابح شاشة' : 'TV Winner'"></span>
+            </div>
+          </div>
+          <div class="p-6 text-center">
+            <h4 class="text-white font-bold text-lg mb-1"
+              x-text="lang === 'ar' ? 'السيد أ**** ر***' : 'Mr. A**** R***'">
+            </h4>
+            <p class="text-gray-400 text-sm" x-text="lang === 'ar' ? 'فائز في سحب شهر يناير' : 'January Draw Winner'">
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="bg-dark-card rounded-3xl overflow-hidden border-2 border-primary/20 hover:border-primary transition-all scale-105 shadow-primary/20 shadow-xl">
+          <div class="relative aspect-[4/3]">
+            <img src="./imgs/c4.jpeg" alt="Winner" class="w-full h-full object-cover">
+            <div class="absolute top-4 right-4 bg-yellow-500 text-black px-3 py-1 rounded-full text-xs font-bold">
+              <i class="fas fa-star mr-1"></i> <span x-text="lang === 'ar' ? 'الجائزة الكبرى' : 'Grand Prize'"></span>
+            </div>
+          </div>
+          <div class="p-6 text-center">
+            <h4 class="text-white font-bold text-lg mb-1" x-text="lang === 'ar' ? 'عائلة س*****' : 'Family C*****'">
+            </h4>
+            <p class="text-gray-400 text-sm" x-text="lang === 'ar' ? 'فائز شاشة نافيتك' : 'Navitech TV Winner'">
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="bg-dark-card rounded-3xl overflow-hidden border-2 border-primary/20 hover:border-primary transition-all">
+          <div class="relative aspect-[4/3]">
+            <img src="./imgs/c3.jpeg" alt="Winner" class="w-full h-full object-cover">
+            <div class="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-xs font-bold">
+              <i class="fas fa-medal mr-1"></i> <span
+                x-text="lang === 'ar' ? 'رابح مكنسة كهربائية' : 'Electric Kettle Winner'"></span>
+            </div>
+          </div>
+          <div class="p-6 text-center">
+            <h4 class="text-white font-bold text-lg mb-1"
+              x-text="lang === 'ar' ? 'الأستاذة م***** ب*****' : 'Ms. M***** B*****'"></h4>
+            <p class="text-gray-400 text-sm" x-text="lang === 'ar' ? 'فائزة سحب مارس' : 'March Draw Winner'"></p>
+          </div>
+        </div>
+
+        <div
+          class="bg-dark-card rounded-3xl overflow-hidden border-2 border-primary/20 hover:border-primary transition-all">
+          <div class="relative aspect-[4/3]">
+            <img src="./imgs/c2.jpeg" alt="Winner" class="w-full h-full object-cover">
+            <div class="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-xs font-bold">
+              <i class="fas fa-medal mr-1"></i> <span x-text="lang === 'ar' ? 'رابح رسيفر' : 'Receiver Winner'"></span>
+            </div>
+          </div>
+          <div class="p-6 text-center">
+            <h4 class="text-white font-bold text-lg mb-1"
+              x-text="lang === 'ar' ? 'السيد م***** ح*****' : 'Mr. M***** H*****'"></h4>
+            <p class="text-gray-400 text-sm" x-text="lang === 'ar' ? 'فائزة سحب فبراير' : 'February Draw Winner'"></p>
+          </div>
+        </div>
+
+        <div
+          class="bg-dark-card rounded-3xl overflow-hidden border-2 border-primary/20 hover:border-primary transition-all">
+          <div class="relative aspect-[4/3]">
+            <img src="./imgs/c3.jpeg" alt="Winner" class="w-full h-full object-cover">
+            <div class="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-xs font-bold">
+              <i class="fas fa-medal mr-1"></i> <span
+                x-text="lang === 'ar' ? 'رابح مكنسة كهربائية' : 'Electric Kettle Winner'"></span>
+            </div>
+          </div>
+          <div class="p-6 text-center">
+            <h4 class="text-white font-bold text-lg mb-1"
+              x-text="lang === 'ar' ? 'السيد أ**** ش*****' : 'Mr. A**** S*****'"></h4>
+            <p class="text-gray-400 text-sm" x-text="lang === 'ar' ? 'فائزة سحب يونيو' : 'June Draw Winner'"></p>
+          </div>
+        </div>
+
+        <div
+          class="bg-dark-card rounded-3xl overflow-hidden border-2 border-primary/20 hover:border-primary transition-all">
+          <div class="relative aspect-[4/3]">
+            <img src="./imgs/c7.jpeg" alt="Winner" class="w-full h-full object-cover">
+            <div class="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-xs font-bold">
+              <i class="fas fa-medal mr-1"></i> <span
+                x-text="lang === 'ar' ? 'رابح طباخ كهربائي' : 'Induction Cooker Winner'"></span>
+            </div>
+          </div>
+          <div class="p-6 text-center">
+            <h4 class="text-white font-bold text-lg mb-1"
+              x-text="lang === 'ar' ? 'السيد ص**** ر*****' : 'Mr. S**** R*****'"></h4>
+            <p class="text-gray-400 text-sm" x-text="lang === 'ar' ? 'فائزة سحب اكتوبر' : 'October Draw Winner'"></p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- ==================== MAINTENANCE SECTION ==================== -->
+  <section id="maintenance" class="py-20 lg:py-32 bg-dark relative overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 grid-pattern opacity-30"></div>
+
+    <div class="max-w-7xl mx-auto relative z-10 px-4 sm:px-6 lg:px-8">
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <h2 class="text-4xl sm:text-5xl font-bold text-white mb-4"
+          x-text="lang === 'ar' ? 'خدمة الصيانة المعتمدة' : 'Authorized Maintenance Service'"></h2>
+        <p class="text-xl text-primary font-semibold mb-4"
+          x-text="lang === 'ar' ? 'وكلاء صيانة معتمدون' : 'Authorized Maintenance Agents'"></p>
+        <p class="text-gray-400 max-w-2xl mx-auto"
+          x-text="lang === 'ar' ? 'نقدم خدمات صيانة احترافية لجميع الأجهزة المنزلية والإلكترونيات بأيدي فنيين معتمدين ومدربين' : 'We provide professional maintenance services for all home appliances and electronics by certified and trained technicians'">
+        </p>
+      </div>
+
+      <!-- Features Grid -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        <!-- Feature 1 -->
+        <div
+          class="group p-6 rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 card-hover">
+          <div
+            class="w-14 h-14 rounded-xl bg-primary/20 flex items-center justify-center mb-4 group-hover:bg-primary/30 transition-colors">
+            <i class="fas fa-wrench text-primary text-2xl"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2 group-hover:text-primary transition-colors"
+            x-text="lang === 'ar' ? 'صيانة احترافية' : 'Professional Maintenance'"></h3>
+          <p class="text-gray-400 text-sm leading-relaxed"
+            x-text="lang === 'ar' ? 'فريق فني متخصص ومدرب على أحدث التقنيات' : 'Specialized technical team trained on the latest technologies'">
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div
+          class="group p-6 rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 card-hover">
+          <div
+            class="w-14 h-14 rounded-xl bg-primary/20 flex items-center justify-center mb-4 group-hover:bg-primary/30 transition-colors">
+            <i class="fas fa-cogs text-primary text-2xl"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2 group-hover:text-primary transition-colors"
+            x-text="lang === 'ar' ? 'قطع غيار أصلية' : 'Original Spare Parts'"></h3>
+          <p class="text-gray-400 text-sm leading-relaxed"
+            x-text="lang === 'ar' ? 'نستخدم فقط القطع الأصلية المعتمدة' : 'We only use approved original parts'"></p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div
+          class="group p-6 rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 card-hover">
+          <div
+            class="w-14 h-14 rounded-xl bg-primary/20 flex items-center justify-center mb-4 group-hover:bg-primary/30 transition-colors">
+            <i class="fas fa-microchip text-primary text-2xl"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2 group-hover:text-primary transition-colors"
+            x-text="lang === 'ar' ? 'تشخيص ذكي' : 'Smart Diagnosis'"></h3>
+          <p class="text-gray-400 text-sm leading-relaxed"
+            x-text="lang === 'ar' ? 'أجهزة تشخيص حديثة لاكتشاف الأعطال بدقة' : 'Modern diagnostic devices to accurately detect faults'">
+          </p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div
+          class="group p-6 rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 card-hover">
+          <div
+            class="w-14 h-14 rounded-xl bg-primary/20 flex items-center justify-center mb-4 group-hover:bg-primary/30 transition-colors">
+            <i class="fas fa-shield-alt text-primary text-2xl"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2 group-hover:text-primary transition-colors"
+            x-text="lang === 'ar' ? 'ضمان الصيانة' : 'Maintenance Warranty'"></h3>
+          <p class="text-gray-400 text-sm leading-relaxed"
+            x-text="lang === 'ar' ? 'ضمان على جميع أعمال الصيانة والإصلاح' : 'Warranty on all maintenance and repair work'">
+          </p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div
+          class="group p-6 rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 card-hover">
+          <div
+            class="w-14 h-14 rounded-xl bg-primary/20 flex items-center justify-center mb-4 group-hover:bg-primary/30 transition-colors">
+            <i class="fas fa-phone-alt text-primary text-2xl"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2 group-hover:text-primary transition-colors"
+            x-text="lang === 'ar' ? 'دعم فني 24/7' : '24/7 Technical Support'"></h3>
+          <p class="text-gray-400 text-sm leading-relaxed"
+            x-text="lang === 'ar' ? 'فريق دعم جاهز للمساعدة على مدار الساعة' : 'Support team ready to help around the clock'">
+          </p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div
+          class="group p-6 rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 card-hover">
+          <div
+            class="w-14 h-14 rounded-xl bg-primary/20 flex items-center justify-center mb-4 group-hover:bg-primary/30 transition-colors">
+            <i class="fas fa-clock text-primary text-2xl"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2 group-hover:text-primary transition-colors"
+            x-text="lang === 'ar' ? 'سرعة الاستجابة' : 'Quick Response'"></h3>
+          <p class="text-gray-400 text-sm leading-relaxed"
+            x-text="lang === 'ar' ? 'نصلك في أسرع وقت ممكن' : 'We reach you as soon as possible'"></p>
+        </div>
+      </div>
+
+      <!-- CTA Section -->
+      <div class="relative rounded-3xl overflow-hidden">
+        <!-- Background -->
+        <div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary/5"></div>
+        <div class="absolute inset-0 opacity-50"
+          style="background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNDNDFFM0EiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDM0aDR2NGgtNHpNMjAgMjBoNHY0aC00eiIvPjwvZz48L2c+PC9zdmc+');">
+        </div>
+
+        <div class="relative p-8 sm:p-12">
+          <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+            <!-- Left Content -->
+            <div class="text-center lg:text-left">
+              <h3 class="text-2xl sm:text-3xl font-bold text-white mb-4"
+                x-text="lang === 'ar' ? 'بحاجة إلى صيانة؟' : 'Need Maintenance?'"></h3>
+              <p class="text-gray-400 mb-6 max-w-md"
+                x-text="lang === 'ar' ? 'اتصل بنا الآن واحصل على خدمة صيانة احترافية بأسعار تنافسية' : 'Contact us now and get professional maintenance service at competitive prices'">
+              </p>
+
+              <!-- Benefits -->
+              <div class="flex flex-wrap justify-center lg:justify-start gap-3">
+                <div class="flex items-center gap-2 text-sm text-gray-300">
+                  <i class="fas fa-check-circle text-primary"></i>
+                  <span x-text="lang === 'ar' ? 'فنيون معتمدون' : 'Certified Technicians'"></span>
+                </div>
+                <div class="flex items-center gap-2 text-sm text-gray-300">
+                  <i class="fas fa-check-circle text-primary"></i>
+                  <span x-text="lang === 'ar' ? 'أسعار تنافسية' : 'Competitive Prices'"></span>
+                </div>
+                <div class="flex items-center gap-2 text-sm text-gray-300">
+                  <i class="fas fa-check-circle text-primary"></i>
+                  <span x-text="lang === 'ar' ? 'ضمان شامل' : 'Comprehensive Warranty'"></span>
+                </div>
+                <div class="flex items-center gap-2 text-sm text-gray-300">
+                  <i class="fas fa-check-circle text-primary"></i>
+                  <span x-text="lang === 'ar' ? 'خدمة سريعة' : 'Fast Service'"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Content - CTA Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4">
+              <!-- <button
+                class="px-8 py-4 bg-primary text-white rounded-full font-semibold btn-shine glow-red hover:bg-primary-dark transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2">
+                <i class="fas fa-wrench"></i>
+                <span x-text="lang === 'ar' ? 'اطلب صيانة' : 'Request Maintenance'"></span>
+              </button> -->
+              <!-- <button href="https://wa.me/905530734836" target="_blank"
+                class="px-8 py-4 bg-white/10 text-white rounded-full font-semibold border border-white/20 hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-2">
+                <i class="fas fa-phone-alt"></i>
+                <span x-text="lang === 'ar' ? 'اتصل بنا الآن' : 'Call Us Now'"></span>
+              </button> -->
+
+              <a href="tel:+905380632622"
+                class="px-8 py-4 bg-white/10 text-white rounded-full font-semibold border border-white/20 hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-2">
+                <i class="fas fa-phone-alt"></i>
+                <span x-text="lang === 'ar' ? 'اتصل بنا الآن' : 'Call Us Now'"></span>
+              </a>
+              <a href="https://wa.me/905380632622" target="_blank"
+                class="px-8 py-4 bg-green-600/20 text-white rounded-full font-semibold border border-green-600/50 hover:bg-green-600/40 transition-all duration-300 flex items-center justify-center gap-2">
+                <i class="fab fa-whatsapp"></i>
+                <span x-text="lang === 'ar' ? 'تواصل واتساب' : 'WhatsApp Us'"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-[#0a0a0a] border-t border-white/10">
+    <!-- Main Footer -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <!-- Company Info -->
+        <div class="lg:col-span-1">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12 bg-gradient-to-br from-black to-primary rounded-lg flex items-center justify-center"
+              style="background: white;">
+              <span class="text-white font-bold text-xl"> <img src="./imgs/logo.png" alt="FL"></span>
+            </div>
+            <span class="text-xl font-bold text-white">Fast Link</span>
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed mb-6"
+            x-text="lang === 'ar' ? 'Fast Link - شركة رائدة في استيراد وتصدير الأجهزة المنزلية والإلكترونيات' : 'Fast Link - A leading company in importing and exporting home appliances and electronics'">
+          </p>
+          <!-- Social Links -->
+          <div>
+            <h4 class="text-white font-semibold mb-4" x-text="lang === 'ar' ? 'تابعنا' : 'Follow Us'"></h4>
+            <div class="flex gap-3">
+              <a href="https://www.facebook.com/share/184RsPXDGi/?mibextid=wwXIfr" target="_blank"
+                class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-primary hover:border-primary transition-all duration-300">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="https://www.instagram.com/fast.link.elektronik/" target="_blank"
+                class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-primary hover:border-primary transition-all duration-300">
+                <i class="fab fa-instagram"></i>
+              </a>
+
+              <a href="https://www.tiktok.com/@fastlink.co.tr/" target="_blank"
+                class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-primary hover:border-primary transition-all duration-300">
+                <i class="fab fa-tiktok"></i>
+              </a>
+              <!-- <a href="#"
+                class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-primary hover:border-primary transition-all duration-300">
+                <i class="fab fa-twitter"></i>
+              </a> -->
+              <a href="https://www.youtube.com/@Fastlink-dk7eb" target="_blank"
+                class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-primary hover:border-primary transition-all duration-300">
+                <i class="fab fa-youtube"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="text-white font-semibold mb-6" x-text="lang === 'ar' ? 'الشركة' : 'Company'"></h4>
+          <ul class="space-y-3">
+            <template x-if="lang === 'ar'">
+              <div class="space-y-3">
+                <li><a href="#home"
+                    class="text-gray-400 hover:text-primary transition-colors text-sm flex items-center gap-2 group"><i
+                      class="fas fa-external-link-alt text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>الرئيسية</a>
+                </li>
+                <li><a href="#services"
+                    class="text-gray-400 hover:text-primary transition-colors text-sm flex items-center gap-2 group"><i
+                      class="fas fa-external-link-alt text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>خدماتنا</a>
+                </li>
+                <li><a href="#brands"
+                    class="text-gray-400 hover:text-primary transition-colors text-sm flex items-center gap-2 group"><i
+                      class="fas fa-external-link-alt text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>التوكيلات</a>
+                </li>
+                <li><a href="#maintenance"
+                    class="text-gray-400 hover:text-primary transition-colors text-sm flex items-center gap-2 group"><i
+                      class="fas fa-external-link-alt text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>الصيانة</a>
+                </li>
+                <li><a href="#gifts"
+                    class="text-gray-400 hover:text-primary transition-colors text-sm flex items-center gap-2 group"><i
+                      class="fas fa-external-link-alt text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>الهدايا</a>
+                </li>
+              </div>
+            </template>
+            <template x-if="lang === 'en'">
+              <div class="space-y-3">
+                <li><a href="#home"
+                    class="text-gray-400 hover:text-primary transition-colors text-sm flex items-center gap-2 group"><i
+                      class="fas fa-external-link-alt text-xs opacity-0 group-hover:opacity-100 transition-opacity rotate-180"></i>Home</a>
+                </li>
+                <li><a href="#services"
+                    class="text-gray-400 hover:text-primary transition-colors text-sm flex items-center gap-2 group"><i
+                      class="fas fa-external-link-alt text-xs opacity-0 group-hover:opacity-100 transition-opacity rotate-180"></i>Services</a>
+                </li>
+                <li><a href="#brands"
+                    class="text-gray-400 hover:text-primary transition-colors text-sm flex items-center gap-2 group"><i
+                      class="fas fa-external-link-alt text-xs opacity-0 group-hover:opacity-100 transition-opacity rotate-180"></i>Brands</a>
+                </li>
+                <li><a href="#maintenance"
+                    class="text-gray-400 hover:text-primary transition-colors text-sm flex items-center gap-2 group"><i
+                      class="fas fa-external-link-alt text-xs opacity-0 group-hover:opacity-100 transition-opacity rotate-180"></i>Maintenance</a>
+                </li>
+                <li><a href="#gifts"
+                    class="text-gray-400 hover:text-primary transition-colors text-sm flex items-center gap-2 group"><i
+                      class="fas fa-external-link-alt text-xs opacity-0 group-hover:opacity-100 transition-opacity rotate-180"></i>Gifts</a>
+                </li>
+              </div>
+            </template>
+          </ul>
+        </div>
+
+        <!-- Contact Info -->
+        <div>
+          <h4 class="text-white font-semibold mb-6" x-text="lang === 'ar' ? 'تواصل معنا' : 'Contact Us'"></h4>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <i class="fas fa-map-marker-alt text-primary flex-shrink-0 mt-1"></i>
+              <!-- <span class="text-gray-400 text-sm"></span> -->
+
+              <a href="https://maps.app.goo.gl/KAbLPLykbnf1wmdp8"
+                class="text-gray-400 text-sm hover:text-primary transition-colors"
+                x-text="lang === 'ar' ? 'بورصة.تشارشمبا.قرب مطهم الميدان.مفرق الصيدلية' : 'Çırpan Mh. 1.Altıparmak Sk. No:51/B Osmangazi/Bursa'"></a>
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="fas fa-phone text-primary flex-shrink-0"></i>
+              <span class="text-gray-400 text-sm" x-text="lang === 'ar' ? 'مبيعات' : 'Sales'"></span>
+              <a href="tel:+905380632622" class="text-gray-400 text-sm hover:text-primary transition-colors"
+                style="direction: ltr;">
+                +90 538 063 26 22</a>
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="fas fa-phone text-primary flex-shrink-0"></i>
+              <span class="text-gray-400 text-sm" x-text="lang === 'ar' ? 'صالة خدمات' : 'Service Hall'"></span>
+              <a href="tel:+905359688220" class="text-gray-400 text-sm hover:text-primary transition-colors"
+                style="direction: ltr;">+90 535 968 82 20</a>
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="fas fa-phone text-primary flex-shrink-0"></i>
+              <span class="text-gray-400 text-sm"
+                x-text="lang === 'ar' ? 'صيانة الشاشات' : 'Screens Maintenance'"></span>
+              <a href="tel:+905313122800" class="text-gray-400 text-sm hover:text-primary transition-colors"
+                style="direction: ltr;">+90 531 312 28 00</a>
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="fas fa-phone text-primary flex-shrink-0"></i>
+              <span class="text-gray-400 text-sm" x-text="lang === 'ar' ? 'خدمات النت' : 'Net Services'"></span>
+              <a href="tel:+905319019000" class="text-gray-400 text-sm hover:text-primary transition-colors"
+                style="direction: ltr;">+90 531 901 90 00</a>
+            </li>
+
+            <li class="flex items-center gap-3">
+              <i class="fas fa-envelope text-primary flex-shrink-0"></i>
+              <a href="mailto:fastlink.co.tr@gmail.com"
+                class="text-gray-400 text-sm hover:text-primary transition-colors">fastlink.co.tr@gmail.com</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Working Hours -->
+        <div>
+          <h4 class="text-white font-semibold mb-6" x-text="lang === 'ar' ? 'ساعات العمل' : 'Working Hours'"></h4>
+          <ul class="space-y-3">
+            <li class="flex justify-between text-sm">
+              <span class="text-gray-400" x-text="lang === 'ar' ? 'السبت - الخميس' : 'Saturday - Thursday'"></span>
+              <span class="text-white">9:00 - 21:00</span>
+            </li>
+            <li class="flex justify-between text-sm">
+              <span class="text-gray-400" x-text="lang === 'ar' ? 'الجمعة' : 'Friday'"></span>
+              <span class="text-white">14:00 - 20:00</span>
+            </li>
+          </ul>
+          <div class="mt-6 p-4 rounded-xl bg-primary/10 border border-primary/20">
+            <p class="text-primary text-sm font-medium text-center"
+              x-text="lang === 'ar' ? 'خدمة الطوارئ 5★' : '5★ Emergency Service'"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="border-t border-white/10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p class="text-gray-500 text-sm" style="width: 100%;text-align: center;">© 2024 Fast Link. <span
+              x-text="lang === 'ar' ? 'جميع الحقوق محفوظة' : 'All Rights Reserved'"></span></p>
+
+        </div>
+
+
+        <!-- <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p class="text-gray-500 text-sm">© 2024 Fast Link. <span
+              x-text="lang === 'ar' ? 'جميع الحقوق محفوظة' : 'All Rights Reserved'"></span></p>
+          <div class="flex items-center gap-6">
+            <a href="#" class="text-gray-500 hover:text-primary text-sm transition-colors"
+              x-text="lang === 'ar' ? 'سياسة الخصوصية' : 'Privacy Policy'"></a>
+            <a href="#" class="text-gray-500 hover:text-primary text-sm transition-colors"
+              x-text="lang === 'ar' ? 'شروط الاستخدام' : 'Terms of Use'"></a>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
