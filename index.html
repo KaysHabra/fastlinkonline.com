@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fast Link - Your Gateway to Premium Electronics</title>
+  <title>Fast Link® - Your Gateway to Premium Electronics</title>
   <link rel="icon" type="image/png" href="./imgs/logo.png" />
 
   <!-- Tailwind CSS -->
@@ -295,7 +295,7 @@
               <img src="./imgs/logo.png" alt="FL">
             </span>
           </div>
-          <span class="text-xl font-bold text-white hidden sm:block">Fast Link</span>
+          <span class="text-xl font-bold text-white hidden sm:block">Fast Link®</span>
         </a>
 
         <!-- Desktop Navigation -->
@@ -410,16 +410,43 @@
         </div>
 
         <!-- Title -->
-        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold mb-4 text-white">
-          Fast Link
-        </h1>
+        <!-- <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold mb-4 text-white">
+          Fast Link®
+        </h1> -->
+
+        <style>
+          .logo {
+            font-family: "Times New Roman", serif;
+            font-size: 80px;
+            font-style: italic;
+            font-weight: 900;
+            letter-spacing: 2px;
+
+            text-shadow:
+              0 0 6px rgba(255, 255, 255, 0.9),
+              0 0 6px rgba(255, 255, 255, 0.8),
+              0 0 10px rgba(255, 255, 255, 0.6);
+          }
+
+          .fast {
+            color: #ff1a1a;
+          }
+
+          .link {
+            color: #000;
+          }
+        </style>
+        <div class="logo">
+          <span class="fast">Fast</span>
+          <span class="link">Link®</span>
+        </div>
 
         <h2 class="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-6 text-primary glow-text"
-          x-text="lang === 'ar' ? 'بوابتك للإلكترونيات المتميزة' : 'Your Gateway to Premium Electronics'"></h2>
+          x-text="lang === 'ar' ? 'بوابتكم الرائدة للإلكترونيات المتميزة' : 'Your Gateway to Premium Electronics'"></h2>
 
         <!-- Description -->
         <p class="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto mb-10 leading-relaxed"
-          x-text="lang === 'ar' ? 'نقدم لك أفضل الأجهزة المنزلية والإلكترونيات من أشهر العلامات التجارية العالمية بأسعار تنافسية وخدمة متميزة' : 'We offer the best home appliances and electronics from world-renowned brands at competitive prices with exceptional service'">
+          x-text="lang === 'ar' ? 'نقدم لكم أحدث الأجهزة الإلكترونية والمنزلية من أشهر الماركات العالمية بأسعار تنافسية وخدمة متميزة' : 'Elevating your home with excellence. At Fast Link, we bring you a curated selection of world-class electronics and appliances, blending premium quality with unbeatable value and a service experience that puts you first.'">
         </p>
 
         <!-- CTA Button -->
@@ -545,14 +572,14 @@
               class="w-20 h-20 rounded-xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110 bg-violet-500/20"
               style="background-color: white;">
               <!-- <i class="fas fa-stopwatch text-4xl brand-onvo"></i> -->
-              <img src="./imgs/Onvo.jpg" alt="Onvo" style="border-radius: 10px;">
+              <img src="./imgs/Onvo.png" alt="Onvo" style="border-radius: 10px;">
             </div>
             <h3 class="text-xl font-bold text-white group-hover:text-violet-500 transition-colors">Onvo</h3>
             <div class="w-12 h-1 rounded-full mt-3 transition-all group-hover:w-20 bg-violet-500"></div>
           </div>
         </div>
 
-        <!-- Vobim -->
+        <!-- fobem.png -->
         <div
           class="group relative p-8 rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 card-hover overflow-hidden">
           <div
@@ -561,9 +588,10 @@
           <div class="relative z-10 flex flex-col items-center">
             <div
               class="w-20 h-20 rounded-xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110 bg-green-500/20">
-              <i class="fas fa-headphones text-4xl brand-vobim"></i>
+              <!-- <i class="fas fa-headphones text-4xl brand-vobim"></i> -->
+              <img src="./imgs/fobem.png" alt="fobem" style="border-radius: 10px;">
             </div>
-            <h3 class="text-xl font-bold text-white group-hover:text-green-500 transition-colors">Vobim</h3>
+            <h3 class="text-xl font-bold text-white group-hover:text-green-500 transition-colors">Fobem</h3>
             <div class="w-12 h-1 rounded-full mt-3 transition-all group-hover:w-20 bg-green-500"></div>
           </div>
         </div>
@@ -1063,7 +1091,7 @@
               style="background: white;">
               <span class="text-white font-bold text-xl"> <img src="./imgs/logo.png" alt="FL"></span>
             </div>
-            <span class="text-xl font-bold text-white">Fast Link</span>
+            <span class="text-xl font-bold text-white">Fast Link®</span>
           </div>
           <p class="text-gray-400 text-sm leading-relaxed mb-6"
             x-text="lang === 'ar' ? 'Fast Link - شركة رائدة في استيراد وتصدير الأجهزة المنزلية والإلكترونيات' : 'Fast Link - A leading company in importing and exporting home appliances and electronics'">
@@ -1224,14 +1252,14 @@
     <div class="border-t border-white/10">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p class="text-gray-500 text-sm" style="width: 100%;text-align: center;">© 2024 Fast Link. <span
+          <p class="text-gray-500 text-sm" style="width: 100%;text-align: center;">© 2020 Fast Link. <span
               x-text="lang === 'ar' ? 'جميع الحقوق محفوظة' : 'All Rights Reserved'"></span></p>
 
         </div>
 
 
         <!-- <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p class="text-gray-500 text-sm">© 2024 Fast Link. <span
+          <p class="text-gray-500 text-sm">© 2020 Fast Link. <span
               x-text="lang === 'ar' ? 'جميع الحقوق محفوظة' : 'All Rights Reserved'"></span></p>
           <div class="flex items-center gap-6">
             <a href="#" class="text-gray-500 hover:text-primary text-sm transition-colors"
