@@ -295,7 +295,9 @@
               <img src="./imgs/logo.png" alt="FL">
             </span>
           </div>
-          <span class="text-xl font-bold text-white hidden sm:block">Fast Link®</span>
+          <span class="text-xl font-bold text-white hidden sm:block" style="direction: ltr;position: relative;">Fast
+            Link<small style="position: absolute;top: -5px;right: -10px;">®</small>
+          </span>
         </a>
 
         <!-- Desktop Navigation -->
@@ -436,9 +438,10 @@
             color: #000;
           }
         </style>
-        <div class="logo">
+        <div class="logo" style="direction: ltr;">
           <span class="fast">Fast</span>
-          <span class="link">Link®</span>
+          <span class="link" style="position: relative;">Link<span
+              style="font-size: 20px;position: absolute;top: 10px;right: -15px;">®</span></span>
         </div>
 
         <h2 class="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-6 text-primary glow-text"
@@ -643,20 +646,21 @@
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="group relative aspect-square overflow-hidden rounded-2xl border border-white/10 card-hover">
-          <img src="https://images.unsplash.com/photo-1550009158-9ebf69173e03?q=80&w=500" alt="Product"
-            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-          <div
-            class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-            <span class="text-white font-medium" x-text="lang === 'ar' ? 'أحدث الشاشات' : 'Latest Screens'"></span>
-          </div>
-        </div>
+
         <div class="group relative aspect-square overflow-hidden rounded-2xl border border-white/10 card-hover">
           <img src="./imgs/p1.jpeg" alt="Product"
             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
           <div
             class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
             <span class="text-white font-medium" x-text="lang === 'ar' ? 'أجمل الشاشات' : 'Latest Screens'"></span>
+          </div>
+        </div>
+        <div class="group relative aspect-square overflow-hidden rounded-2xl border border-white/10 card-hover">
+          <img src="./imgs/p8.jpeg" alt="Product"
+            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+            <span class="text-white font-medium" x-text="lang === 'ar' ? 'أحدث الشاشات' : 'Latest Screens'"></span>
           </div>
         </div>
         <div class="group relative aspect-square overflow-hidden rounded-2xl border border-white/10 card-hover">
@@ -690,6 +694,22 @@
           <div
             class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
             <span class="text-white font-medium" x-text="lang === 'ar' ? 'أجمل الشاشات' : 'Latest Screens'"></span>
+          </div>
+        </div>
+        <div class="group relative aspect-square overflow-hidden rounded-2xl border border-white/10 card-hover">
+          <img src="./imgs/p7.jpeg" alt="Product"
+            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+            <span class="text-white font-medium" x-text="lang === 'ar' ? 'أحدث الشاشات' : 'Latest Screens'"></span>
+          </div>
+        </div>
+        <div class="group relative aspect-square overflow-hidden rounded-2xl border border-white/10 card-hover">
+          <img src="./imgs/p9.jpeg" alt="Product"
+            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+            <span class="text-white font-medium" x-text="lang === 'ar' ? 'أحدث الشاشات' : 'Latest Screens'"></span>
           </div>
         </div>
       </div>
@@ -1091,7 +1111,8 @@
               style="background: white;">
               <span class="text-white font-bold text-xl"> <img src="./imgs/logo.png" alt="FL"></span>
             </div>
-            <span class="text-xl font-bold text-white">Fast Link®</span>
+            <span class="text-xl font-bold text-white" style="direction: ltr;position: relative;">Fast Link<small
+                style="position: absolute;top: -5px;right: -10px;">®</small> </span>
           </div>
           <p class="text-gray-400 text-sm leading-relaxed mb-6"
             x-text="lang === 'ar' ? 'Fast Link - شركة رائدة في استيراد وتصدير الأجهزة المنزلية والإلكترونيات' : 'Fast Link - A leading company in importing and exporting home appliances and electronics'">
@@ -1190,7 +1211,7 @@
 
               <a href="https://maps.app.goo.gl/KAbLPLykbnf1wmdp8"
                 class="text-gray-400 text-sm hover:text-primary transition-colors"
-                x-text="lang === 'ar' ? 'بورصة.تشارشمبا.قرب مطهم الميدان.مفرق الصيدلية' : 'Çırpan Mh. 1.Altıparmak Sk. No:51/B Osmangazi/Bursa'"></a>
+                x-text="lang === 'ar' ? 'تركيا. بورصة. تشارشمبا. قرب مطعم الميدان. مفرق الصيدلية' : 'Çırpan Mh. 1.Altıparmak Sk. No:51/B Osmangazi/Bursa/Türkiye'"></a>
             </li>
             <li class="flex items-center gap-3">
               <i class="fas fa-phone text-primary flex-shrink-0"></i>
